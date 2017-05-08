@@ -10,6 +10,6 @@ public class ConstData {
     public static final double E    = 0.005;
 
     public static final int numberIterations = 10; // 121
-    public static final double[] basePoint = {0.5, 1}; // V5, 6
+    public static final double[] basePoint = {2.7, 3}; // V5, 6
     //public static final double[] basePoint ={0.5, 1}; // V11
 }

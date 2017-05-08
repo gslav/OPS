@@ -34,20 +34,24 @@ public class HookJeeves extends Lab {
 
         ObservableList<LineLevel> lineList = FXCollections.observableArrayList();
         //
+        LineLevel tempLine = new LineLevel();
+
         while (h > E) {
             byte directionIncrease = 0;
             //up
-            directionIncrease = shiftPint(basis, directionIncrease, h, 0);
+            directionIncrease = shiftPoint(basis, directionIncrease, h, 0, tempLine);
             // down
-            directionIncrease = shiftPint(basis, directionIncrease, -h, 0);
+            directionIncrease = shiftPoint(basis, directionIncrease, -h, 0, tempLine);
             // right
-            directionIncrease = shiftPint(basis, directionIncrease, 0, h);
+            directionIncrease = shiftPoint(basis, directionIncrease, 0, h, tempLine);
             //left
-            directionIncrease = shiftPint(basis, directionIncrease, 0, -h);
+            directionIncrease = shiftPoint(basis, directionIncrease, 0, -h, tempLine);
 
             if (directionIncrease == 4)
                 h /= 2;
         }
+
+        lineList.add(tempLine);
 
         X1min = basis[0];
         X2min = basis[1];
@@ -55,7 +59,7 @@ public class HookJeeves extends Lab {
         return lineList;
     }
 
-    private byte shiftPint(double[] point, byte directionIncrease, double shiftX, double shiftY) {
+    private byte shiftPoint(double[] point, byte directionIncrease, double shiftX, double shiftY, LineLevel tempLine) {
 
         if (!isOptimal(point[0] + shiftX, point[1] + shiftY))
             return ++directionIncrease;
@@ -66,6 +70,8 @@ public class HookJeeves extends Lab {
             point[0] += shiftX;
             point[1] += shiftY;
             Ymin = YtempNew;
+            //
+            tempLine.addPoint(point[0], point[1]);
         } else
             ++directionIncrease;
 
