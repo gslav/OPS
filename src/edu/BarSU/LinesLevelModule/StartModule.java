@@ -20,7 +20,7 @@ public class StartModule extends Application {
 
         ObservableList<LineLevel> linesLevel;
         // TODO Convert in arguments, but how ? =(
-        Lab TempMethod = new HookJeevesMethod();
+        Lab TempMethod = new OfPenaltyFunctions();
         linesLevel = TempMethod.Method();
         //
         if (linesLevel.isEmpty())
