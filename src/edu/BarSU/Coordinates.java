@@ -5,7 +5,7 @@ import java.math.RoundingMode;
 import java.util.Comparator;
 
 /**
- * Created by Govor Alexander on 22.03.2017.
+ * Created by gslav on 07.05.2017.
  */
 public class Coordinates implements Comparator {
     private Double Y, X1, X2;
