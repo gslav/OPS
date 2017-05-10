@@ -1,9 +1,12 @@
 package edu.BarSU.Variants.V11;
 
 /**
- * Created by Govor Alexander on 07.05.2017.
+ * Created by gslav on 07.05.2017.
  */
 public class Data {
+
+    public static final double[] basePoint ={1, 1};
+
     public static double func(double X1, double X2) {
         return 2 * X1 - X1 * X1 + X2 * X2;
     }

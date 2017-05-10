@@ -10,6 +10,9 @@ import javafx.scene.chart.XYChart;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 
+import static edu.BarSU.Variants.V11.Data.condition;
+import static edu.BarSU.Variants.V11.Data.func;
+
 public class StartModule extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -20,9 +23,10 @@ public class StartModule extends Application {
         ObservableList<LineLevel> linesLevel;
         // TODO Convert in arguments, but how ? =(
 //        Lab TempMethod = new DirectGrid();
-        Lab TempMethod = new MonteCarlo();
+//        Lab TempMethod = new MonteCarlo();
 //        Lab TempMethod = new HookJeeves();
-//        Lab TempMethod = new OfPenaltyFunctions();
+        Lab TempMethod = new OfPenaltyFunctions();
+
         linesLevel = TempMethod.Method();
         //
         if (linesLevel.isEmpty())
@@ -32,7 +36,7 @@ public class StartModule extends Application {
         System.out.println("Расчет окончен");
 
         // генерация скрипта и запуск gnuplot
-        IsolinesGnuPlot.preSet(edu.BarSU.Variants.V6.Data.func(), edu.BarSU.Variants.V6.Data.condition(), solution);
+        IsolinesGnuPlot.preSet(func(), condition(), solution);
         IsolinesGnuPlot.runPlot();
         //
         System.out.println("График gnuplot построен");
