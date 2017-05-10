@@ -29,11 +29,13 @@ public class StartModule extends Application {
             System.exit(0);
 
         double[] solution = TempMethod.getSolution();
+        System.out.println("Расчет окончен");
 
         // генерация скрипта и запуск gnuplot
-        IsolinesGnuPlot.preSet(edu.BarSU.Variants.V11.Data.func(), edu.BarSU.Variants.V11.Data.condition(), solution);
+        IsolinesGnuPlot.preSet(edu.BarSU.Variants.V6.Data.func(), edu.BarSU.Variants.V6.Data.condition(), solution);
         IsolinesGnuPlot.runPlot();
         //
+        System.out.println("График gnuplot построен");
 
         numberLineChart.setTitle(String.format("X1 = %.3f X2 = %.3f Y = %.3f", solution[0], solution[1], solution[2]));
 
@@ -43,6 +45,8 @@ public class StartModule extends Application {
 
         primaryStage.setTitle("Lines level graph module");
         primaryStage.setScene(new Scene(numberLineChart, 600,600));
+        System.out.println("Настройка сцена окончена");
+
         primaryStage.show();
     }
 

@@ -10,6 +10,8 @@ import static edu.BarSU.Const.ConstData.Xmin;
 
 /**
  * Created by gslav on 08.05.17.
+ *
+ * Download GNUPLOT https://sourceforge.net/projects/gnuplot/
  */
 public class IsolinesGnuPlot {
     // указываем путь к скрипту и файлу для данных
@@ -32,7 +34,7 @@ public class IsolinesGnuPlot {
             writer.println(
                     "f(x,y)=" + func + "\n" +
                             "set xrange[" + Xmin + ":" + Xmax + "]" + "\n" +
-                            "set xrange[" + Xmin + ":" + Xmax + "]" + "\n" +
+                            "set yrange[" + Xmin + ":" + Xmax + "]" + "\n" +
                             "set contour base" + "\n" +
                             "set isosample 250, 250" + "\n" +
                             "set cntrparam level incremental -50, 0.5, 50" + "\n" +
