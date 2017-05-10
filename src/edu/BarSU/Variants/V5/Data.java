@@ -20,4 +20,13 @@ public class Data {
 
         return  true;
     }
+
+    // данные, необходимые для gnuplot
+    public static String func(){
+        return "0.5 * y**2 + 0.5 * x**2 - x - 2 * y + 5";
+    }
+
+    public static String condition() {
+        return "(($1>=0) && ($2>=0) && (2*$1+3*$2>=6) && ($1+4*$2>=5))";
+    }
 }
