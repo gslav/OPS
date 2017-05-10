@@ -2,6 +2,8 @@ package edu.BarSU.LinesLevelModule;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import static edu.BarSU.Const.ConstData.Xmax;
 import static edu.BarSU.Const.ConstData.Xmin;
@@ -20,7 +22,10 @@ public class IsolinesGnuPlot {
     // указать путь к исполнямой программе, если не установлена в системе
     private static String pathToGnuPlot = "gnuplot";
 
-    public static void preSet(String func, String condition) {
+    public static void preSet(String func, String condition, double[] solution) {
+        // округляем значение до 3 знаков после запятой
+        Double Zmin = new BigDecimal(solution[2]).setScale(3, RoundingMode.HALF_UP).doubleValue();
+
         try{
             PrintWriter writer = new PrintWriter(pathToScript, "UTF-8");
 
@@ -41,6 +46,13 @@ public class IsolinesGnuPlot {
                             "set xrange[" + Xmin + ":" + Xmax + "]" + "\n" +
                             "set xrange[" + Xmin + ":" + Xmax + "]" + "\n" +
                             "set grid" + "\n" +
+                            "set autoscale" + "\n" +
+
+                            "xPos=" + solution[0] + "\n" +
+                            "yPos=" + solution[1] + "\n" +
+//                            "zPos=" + solution[2] + "\n" +
+                            "set label at xPos, yPos \"" + Zmin + "\" point pointtype 7 pointsize 1" + "\n" +
+
                             "unset key" + "\n" +
 
                             "p '" + pathToData + "'\\" + "\n" +

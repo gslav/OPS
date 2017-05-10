@@ -41,8 +41,8 @@ public class StartModule extends Application {
         primaryStage.setScene(new Scene(numberLineChart, 600,600));
         primaryStage.show();
 
-        // генерация скрипта запуск gnuplot
-        IsolinesGnuPlot.preSet(func(), condition());
+        // генерация скрипта и запуск gnuplot
+        IsolinesGnuPlot.preSet(func(), condition(), solution);
         IsolinesGnuPlot.runPlot();
     }
 
