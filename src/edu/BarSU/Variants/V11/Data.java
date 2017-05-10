@@ -17,4 +17,14 @@ public class Data {
 
         return  true;
     }
+
+    // данные, необходимые для gnuplot
+    public static String func(){
+        return "2*x-x*x+y*y";
+    }
+
+    public static String condition() {
+        return "($1>=0 && $2>=0 && 2*$1*$1+3*$2*$2<=6)";
+    }
+
 }

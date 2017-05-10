@@ -10,6 +10,9 @@ import javafx.scene.chart.XYChart;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 
+import static edu.BarSU.Variants.V11.Data.condition;
+import static edu.BarSU.Variants.V11.Data.func;
+
 
 public class StartModule extends Application {
     @Override
@@ -37,6 +40,10 @@ public class StartModule extends Application {
         primaryStage.setTitle("Lines level graph module");
         primaryStage.setScene(new Scene(numberLineChart, 600,600));
         primaryStage.show();
+
+        // генерация скрипта запуск gnuplot
+        IsolinesGnuPlot.preSet(func(), condition());
+        IsolinesGnuPlot.runPlot();
     }
 
     public static void main(String[] args) {
