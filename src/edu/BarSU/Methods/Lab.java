@@ -12,7 +12,7 @@ public abstract class Lab {
     protected double Ymin;
 
     public double[] getSolution() {
-        return new double[]{X1min, X1min, Ymin};
+        return new double[]{X1min, X2min, Ymin};
     }
 
     public abstract ObservableList<LineLevel> Method();
