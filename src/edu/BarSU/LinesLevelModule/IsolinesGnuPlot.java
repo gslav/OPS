@@ -1,9 +1,14 @@
 package edu.BarSU.LinesLevelModule;
 
+import com.sun.xml.internal.bind.v2.runtime.Coordinator;
+import edu.BarSU.Coordinates;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
+import java.util.List;
 
 import static edu.BarSU.Const.ConstData.Xmax;
 import static edu.BarSU.Const.ConstData.Xmin;
@@ -24,9 +29,13 @@ public class IsolinesGnuPlot {
     // указать путь к исполнямой программе, если не установлена в системе
     private static String pathToGnuPlot = "gnuplot";
 
-    public static void preSet(String func, String condition, double[] solution) {
+    public static void preSet(String func, String condition, double[] solution, ArrayList<Coordinates>... methodWay) {
         // округляем значение до 3 знаков после запятой
         Double Zmin = new BigDecimal(solution[2]).setScale(3, RoundingMode.HALF_UP).doubleValue();
+
+        // TODO координаты точек
+        if (~methodWay.length == 0)
+            ;
 
         try{
             PrintWriter writer = new PrintWriter(pathToScript, "UTF-8");
