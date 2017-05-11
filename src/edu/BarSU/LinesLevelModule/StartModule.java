@@ -10,6 +10,8 @@ import javafx.scene.chart.XYChart;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 
+import static edu.BarSU.Variants.V11.Data.condition;
+import static edu.BarSU.Variants.V11.Data.func;
 
 public class StartModule extends Application {
     @Override
@@ -20,13 +22,24 @@ public class StartModule extends Application {
 
         ObservableList<LineLevel> linesLevel;
         // TODO Convert in arguments, but how ? =(
+//        Lab TempMethod = new DirectGrid();
+//        Lab TempMethod = new MonteCarlo();
+//        Lab TempMethod = new HookJeeves();
         Lab TempMethod = new OfPenaltyFunctions();
+
         linesLevel = TempMethod.Method();
         //
         if (linesLevel.isEmpty())
             System.exit(0);
 
         double[] solution = TempMethod.getSolution();
+        System.out.println("Расчет окончен");
+
+        // генерация скрипта и запуск gnuplot
+        IsolinesGnuPlot.preSet(func(), condition(), solution);
+        IsolinesGnuPlot.runPlot();
+        //
+        System.out.println("График gnuplot построен");
 
         numberLineChart.setTitle(String.format("X1 = %.3f X2 = %.3f Y = %.3f", solution[0], solution[1], solution[2]));
 
@@ -36,6 +49,8 @@ public class StartModule extends Application {
 
         primaryStage.setTitle("Lines level graph module");
         primaryStage.setScene(new Scene(numberLineChart, 600,600));
+        System.out.println("Настройка сцена окончена");
+
         primaryStage.show();
     }
 
