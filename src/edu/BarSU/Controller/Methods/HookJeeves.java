@@ -1,6 +1,6 @@
 package edu.BarSU.Controller.Methods;
 
-import static edu.BarSU.Model.Variants.V6.Data.*;
+import static edu.BarSU.Model.Variants.V11.Data.*;
 
 import edu.BarSU.Model.SettingsData;
 

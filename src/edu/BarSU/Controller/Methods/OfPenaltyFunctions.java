@@ -1,6 +1,6 @@
 package edu.BarSU.Controller.Methods;
 
-import static edu.BarSU.Model.Variants.V6.Data.*;
+import static edu.BarSU.Model.Variants.V11.Data.*;
 
 import edu.BarSU.Model.SettingsData;
 import edu.BarSU.Controller.LinesLevelModule.LineLevel;
@@ -68,6 +68,7 @@ public class OfPenaltyFunctions extends Lab {
         double YtempNew = func(point[0] + shiftX, point[1] + shiftY);
 
         if (!isOptimal(point[0] + shiftX, point[1] + shiftY))
+            //YtempNew += func((X1min + shiftX), (X2min + shiftY)) + 3 * conditionsSum((X1min + shiftX), (X2min + shiftY));
             YtempNew += 1.0/(X1min + shiftX) + 1.0/(X2min + shiftY);
 
         if (Ymin > YtempNew) {

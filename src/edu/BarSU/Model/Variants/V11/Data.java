@@ -18,6 +18,10 @@ public class Data {
         return  true;
     }
 
+//    public static double conditionsSum(double X1, double X2) {
+//        return X1 + X1 + (2 * X1 * X1 + 3 * X2 * X2);
+//    }
+
     public static String func(){
         return "2*x-x**2+y**2";
     }

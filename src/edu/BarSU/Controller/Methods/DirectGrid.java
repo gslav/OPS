@@ -1,6 +1,6 @@
 package edu.BarSU.Controller.Methods;
 
-import static edu.BarSU.Model.Variants.V6.Data.*;
+import static edu.BarSU.Model.Variants.V11.Data.*;
 
 import edu.BarSU.Model.SettingsData;
 import edu.BarSU.Controller.LinesLevelModule.LineLevel;
@@ -22,7 +22,7 @@ public class DirectGrid extends Lab {
     public ObservableList<LineLevel> Method(SettingsData data) {
         X1min = data.Xmin;
         X2min = data.Xmin;
-        Ymin = func(X1min, X2min);
+        Ymin = 1.7E+308;
         //
         double Xmin = data.Xmin;
         double Xmax = data.Xmax;
