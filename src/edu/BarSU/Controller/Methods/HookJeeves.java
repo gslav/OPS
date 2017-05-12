@@ -1,17 +1,16 @@
-package edu.BarSU.Methods;
+package edu.BarSU.Controller.Methods;
 
-import edu.BarSU.Const.ConstData;
+import static edu.BarSU.Model.Variants.V6.Data.*;
+
+import edu.BarSU.Model.SettingsData;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import edu.BarSU.LinesLevelModule.LineLevel;
-
-import static edu.BarSU.Const.ConstData.*;
-import static edu.BarSU.Variants.V11.Data.*;
+import edu.BarSU.Controller.LinesLevelModule.LineLevel;
 
 /**
- * Created by Govor Alexander on 27.04.2017.
+ * Created on 27.04.2017.
  */
 public class HookJeeves extends Lab {
     @Override
@@ -20,17 +19,18 @@ public class HookJeeves extends Lab {
     }
 
     @Override
-    public ObservableList<LineLevel> Method() {
-        X1min = basePoint[0];
-        X2min = basePoint[1];
+    public ObservableList<LineLevel> Method(SettingsData data) {
+        double[] basis = data.basisPoint.clone();
+
+        X1min = basis[0];
+        X2min = basis[1];
         Ymin = func(X1min, X2min);
 
-        double[] basis = {X1min, X2min};
+        double h = data.h;
+        double E = data.E;
 
         if (!isOptimal(basis[0], basis[1]))
             return FXCollections.emptyObservableList();
-
-        double h = ConstData.h;
 
         ObservableList<LineLevel> lineList = FXCollections.observableArrayList();
 
@@ -39,7 +39,6 @@ public class HookJeeves extends Lab {
         tempLine.addPoint(basis[0], basis[1]);
 
         lineList.add(tempLine);
-
 
         while (h > E) {
             byte directionIncrease = 0;

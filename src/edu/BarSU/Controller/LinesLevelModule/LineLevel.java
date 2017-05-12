@@ -1,11 +1,11 @@
-package edu.BarSU.LinesLevelModule;
+package edu.BarSU.Controller.LinesLevelModule;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.XYChart;
 
 /**
- * Created by Govor Alexander on 29.03.2017.
+ * Created on 29.03.2017.
  */
 public class LineLevel {
     private ObservableList<XYChart.Data> LineDataList = FXCollections.observableArrayList();

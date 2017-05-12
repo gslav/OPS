@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="388.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.BarSU.View.Controller">
+    <children>
+        <Button layoutX="45.0" layoutY="48.0" mnemonicParsing="false" onAction="#startDirectGrid" prefHeight="31.0" prefWidth="162.0" text="Прямого перебора" AnchorPane.topAnchor="50.0" />
+        <Button layoutX="46.0" layoutY="200.0" mnemonicParsing="false" onAction="#startOfPenaltyFunctions" prefHeight="31.0" prefWidth="162.0" text="Штрафных функций" AnchorPane.topAnchor="200.0" />
+        <Button layoutX="45.0" layoutY="95.0" mnemonicParsing="false" onAction="#startMonteCarlo" prefHeight="31.0" prefWidth="162.0" text="Монте-Карло" AnchorPane.topAnchor="100.0" />
+        <Button layoutX="46.0" layoutY="146.0" mnemonicParsing="false" onAction="#startHookJeeves" prefHeight="31.0" prefWidth="162.0" text="Хука-Дживса" AnchorPane.topAnchor="150.0" />
+        <Label layoutX="15.0" layoutY="14.0" text="Методы:" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0" />
+        <Separator layoutX="223.0" layoutY="-5.0" orientation="VERTICAL" prefHeight="200.0" />
+        <Separator layoutX="223.0" layoutY="195.0" orientation="VERTICAL" prefHeight="200.0" />
+        <Separator layoutY="257.0" prefWidth="200.0" />
+        <Separator layoutX="200.0" layoutY="257.0" prefWidth="200.0" />
+        <Separator layoutX="400.0" layoutY="257.0" prefWidth="200.0" />
+        <Label layoutX="229.0" layoutY="276.0" text="h:">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Label>
+        <Label layoutX="229.0" layoutY="333.0" text="E:">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Label>
+        <TextField fx:id="tfH" layoutX="261.0" layoutY="278.0" prefHeight="31.0" prefWidth="139.0" text="0.5" />
+        <TextField fx:id="tfE" layoutX="261.0" layoutY="335.0" prefHeight="31.0" prefWidth="139.0" promptText="0.05" text="0.05" />
+        <Label layoutX="9.0" layoutY="263.0" text="Базисная точка:">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <Label layoutX="15.0" layoutY="289.0" text="Х1:">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <Label layoutX="15.0" layoutY="346.0" text="Х2:">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <TextField fx:id="tfX1" layoutX="47.0" layoutY="291.0" prefHeight="31.0" prefWidth="139.0" />
+        <TextField fx:id="tfX2" layoutX="47.0" layoutY="348.0" prefHeight="31.0" prefWidth="139.0" />
+    </children>
+</AnchorPane>

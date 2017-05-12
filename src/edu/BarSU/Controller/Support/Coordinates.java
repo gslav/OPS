@@ -1,11 +1,9 @@
-package edu.BarSU;
+package edu.BarSU.Controller.Support;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.Comparator;
 
 /**
- * Created by gslav on 07.05.2017.
+ * Created on 07.05.2017.
  */
 public class Coordinates implements Comparator {
     private Double Y, X1, X2;
@@ -23,10 +21,10 @@ public class Coordinates implements Comparator {
     }
 
     private void setY(double Y) {
-        this.Y = Rounding(Y);
+        this.Y = Y;
     }
 
-    public double getX1() {
+    public  double getX1() {
         return X1;
     }
 
@@ -42,11 +40,7 @@ public class Coordinates implements Comparator {
         this.X2 = X2;
     }
 
-    private double Rounding(double templateDouble) {
-        return new BigDecimal(templateDouble).setScale(3, RoundingMode.HALF_EVEN).doubleValue();
-    }
-
-    public int compare(Object obj1, Object obj2){
+    public int compare(Object obj1, Object obj2) {
         Coordinates sh1 = (Coordinates )obj1;
         Coordinates sh2 = (Coordinates )obj2;
 

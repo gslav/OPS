@@ -1,20 +1,18 @@
-package edu.BarSU.LinesLevelModule;
+package edu.BarSU.Controller.LinesLevelModule;
 
-import com.sun.xml.internal.bind.v2.runtime.Coordinator;
-import edu.BarSU.Coordinates;
+import edu.BarSU.Model.SettingsData;
+import edu.BarSU.Controller.Support.Coordinates;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.List;
 
-import static edu.BarSU.Const.ConstData.Xmax;
-import static edu.BarSU.Const.ConstData.Xmin;
+import java.util.ArrayList;
 
 /**
- * Created by gslav on 08.05.17.
+ * Created on 08.05.17.
  *
  * Download GNUPLOT https://sourceforge.net/projects/gnuplot/
  */
@@ -32,12 +30,16 @@ public class IsolinesGnuPlot {
     public static void preSet(String func, String condition, double[] solution, ArrayList<Coordinates>... methodWay) {
         // округляем значение до 3 знаков после запятой
         Double Zmin = new BigDecimal(solution[2]).setScale(3, RoundingMode.HALF_UP).doubleValue();
-
+        //
+        SettingsData data = new SettingsData(0,0);
+        double Xmin = data.Xmin;
+        double Xmax = data.Xmax;
+        //
         // TODO координаты точек
         if (~methodWay.length == 0)
             ;
 
-        try{
+        try {
             PrintWriter writer = new PrintWriter(pathToScript, "UTF-8");
 
             writer.println(

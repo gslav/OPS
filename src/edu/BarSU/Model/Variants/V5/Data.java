@@ -1,11 +1,9 @@
-package edu.BarSU.Variants.V5;
+package edu.BarSU.Model.Variants.V5;
 
 /**
  * Created by Govor Alexander on 22.03.2017.
  */
 public class Data {
-
-    public static final double[] basePoint = {2.7, 3};
 
     public static double func(double X1, double X2) {
         return 0.5 * Math.pow(X2, 2) + 0.5 * Math.pow(X1, 2) - X1 - 2 * X2 + 5;
@@ -24,7 +22,6 @@ public class Data {
         return  true;
     }
 
-    // данные, необходимые для gnuplot
     public static String func(){
         return "0.5 * y**2 + 0.5 * x**2 - x - 2 * y + 5";
     }

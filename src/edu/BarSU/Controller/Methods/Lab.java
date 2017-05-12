@@ -1,10 +1,12 @@
-package edu.BarSU.Methods;
+package edu.BarSU.Controller.Methods;
 
-import edu.BarSU.LinesLevelModule.LineLevel;
+import edu.BarSU.Model.SettingsData;
+import edu.BarSU.Controller.LinesLevelModule.LineLevel;
+
 import javafx.collections.ObservableList;
 
 /**
- * Created by Govor Alexander on 30.03.2017.
+ * Created on 30.03.2017.
  */
 public abstract class Lab {
     protected double X1min;
@@ -15,5 +17,5 @@ public abstract class Lab {
         return new double[]{X1min, X2min, Ymin};
     }
 
-    public abstract ObservableList<LineLevel> Method();
+    public abstract ObservableList<LineLevel> Method(SettingsData data);
 }

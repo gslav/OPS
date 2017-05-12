@@ -1,16 +1,16 @@
-package edu.BarSU.Methods;
+package edu.BarSU.Controller.Methods;
 
-import edu.BarSU.LinesLevelModule.LineLevel;
+import static edu.BarSU.Model.Variants.V6.Data.*;
 
-import static edu.BarSU.Const.ConstData.*;
-import static edu.BarSU.Variants.V6.Data.*;
+import edu.BarSU.Model.SettingsData;
+import edu.BarSU.Controller.LinesLevelModule.LineLevel;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 
 /**
- * Created by Govor Alexander on 20.02.2017.
+ * Created on 20.02.2017.
  */
 public class DirectGrid extends Lab {
     @Override
@@ -19,11 +19,15 @@ public class DirectGrid extends Lab {
     }
 
     @Override
-    public ObservableList<LineLevel> Method() {
-        X1min = Xmin;
-        X2min = Xmin;
-        Ymin = func(Xmin, Xmin);
-
+    public ObservableList<LineLevel> Method(SettingsData data) {
+        X1min = data.Xmin;
+        X2min = data.Xmin;
+        Ymin = func(X1min, X2min);
+        //
+        double Xmin = data.Xmin;
+        double Xmax = data.Xmax;
+        double h = data.h;
+        //
         ObservableList<LineLevel> lineLst = FXCollections.observableArrayList();
 
         for (double X1 = Xmin; X1 <= Xmax; X1 += h) {
