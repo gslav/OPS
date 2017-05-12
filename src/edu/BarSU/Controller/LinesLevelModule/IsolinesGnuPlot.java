@@ -3,78 +3,116 @@ package edu.BarSU.Controller.LinesLevelModule;
 import edu.BarSU.Model.SettingsData;
 import edu.BarSU.Controller.Support.Coordinates;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 import java.util.ArrayList;
 
 /**
- * Created on 08.05.17.
+ * Created by gslav on 08.05.17.
  *
  * Download GNUPLOT https://sourceforge.net/projects/gnuplot/
  */
 public class IsolinesGnuPlot {
     // указываем путь к скрипту и файлу для данных
     // Сохраняются во временную определенную в системе
-    // для Windows в пути дожен быть обратный экранированный слэш '\\'
-    // для Unix, Mac в пути должен быть прямой слэш '/'
-    private static String pathToScript = System.getProperty("java.io.tmpdir")+"/myfunc.plt";
-    private static String pathToData = System.getProperty("java.io.tmpdir") + "/contour.dat";
+    private static String pathToScript = System.getProperty("java.io.tmpdir") + "/myfunc.plt";
+    private static String pathToDataContour = System.getProperty("java.io.tmpdir") + "/contour.dat";
+    private static String pathToDataPoints = System.getProperty("java.io.tmpdir") + "/points.dat";
 
     // указать путь к исполнямой программе, если не установлена в системе
     private static String pathToGnuPlot = "gnuplot";
 
-    public static void preSet(String func, String condition, double[] solution, ArrayList<Coordinates>... methodWay) {
+    // TODO изменить тип списка с координатами на нужный (ArrayList<Coordinates> ???)
+    public static void preSet(String func, String condition, double[] solution, ArrayList<Coordinates> ... methodWay) {
         // округляем значение до 3 знаков после запятой
-        Double Zmin = new BigDecimal(solution[2]).setScale(3, RoundingMode.HALF_UP).doubleValue();
+        //Double Zmin = new BigDecimal(solution[2]).setScale(3, RoundingMode.HALF_UP).doubleValue();
         //
         SettingsData data = new SettingsData(0,0);
         double Xmin = data.Xmin;
         double Xmax = data.Xmax;
-        //
-        // TODO координаты точек
-        if (~methodWay.length == 0)
-            ;
+
+        StringBuilder plotStr = new StringBuilder();
+
+        plotStr.append("plot ");
+        plotStr.append("'").append(pathToDataContour).append("' ");
+        plotStr.append("with lines notitle ");
+        plotStr.append(", '").append(pathToDataContour).append("' ");
+        plotStr.append("every ::5::5 with labels boxed notitle ");
+
+        if (~methodWay.length == 0) {
+            try {
+                PrintWriter writer = new PrintWriter(pathToDataPoints, "UTF-8");
+                for (int i=0; i < methodWay.length; ++i) {
+                    writer.println(
+                            " " + methodWay[0].get(i).getX1() +
+                            " " + methodWay[0].get(i).getX1() +
+                            " " + methodWay[0].get(i).getY());
+                }
+                writer.close();
+
+            } catch (FileNotFoundException | UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+
+            // построение линий по точкам для метода Хука-Дживса и метода штрафных функций
+            plotStr.append(", '").append(pathToDataPoints).append("' ");
+            plotStr.append("with lines notitle ");
+            // TODO добавить отображение координат для каждой точки
+            //plotStr.append(", ");
+        }
 
         try {
             PrintWriter writer = new PrintWriter(pathToScript, "UTF-8");
 
-            writer.println(
-                    "f(x,y)=" + func + "\n" +
-                            "set xrange[" + Xmin + ":" + Xmax + "]" + "\n" +
-                            "set yrange[" + Xmin + ":" + Xmax + "]" + "\n" +
-                            "set contour base" + "\n" +
-                            "set isosample 250, 250" + "\n" +
-                            "set cntrparam level incremental -50, 0.5, 50" + "\n" +
-                            "unset surface" + "\n" +
-                            "set table '" + pathToData + "'" + "\n" +
+            writer.println("f(x,y)= (" + condition + " ? " + func + " : 1/0)");
+            writer.println("labels(x,y) = f(x,y)");
+            writer.println("x1="+solution[0]);
+            writer.println("x2="+solution[1]);
 
-                            "splot f(x,y)" + "\n" +
-                            "unset table" + "\n" +
+            writer.println("set contour base");
+            writer.println("unset surface");
 
-                            "reset" + "\n" +
-                            "set xrange[" + Xmin + ":" + Xmax + "]" + "\n" +
-                            "set xrange[" + Xmin + ":" + Xmax + "]" + "\n" +
-                            "set grid" + "\n" +
-                            "set autoscale" + "\n" +
+            writer.println("set cntrparam levels auto 15");
 
-                            "xPos=" + solution[0] + "\n" +
-                            "yPos=" + solution[1] + "\n" +
-//                            "zPos=" + solution[2] + "\n" +
-                            "set label at xPos, yPos \"" + Zmin + "\" point pointtype 7 pointsize 1" + "\n" +
+            writer.println("set xrange[" + Xmin + ":" + Xmax + "]");
+            writer.println("set yrange[" + Xmin + ":" + Xmax + "]");
 
-                            "unset key" + "\n" +
+            writer.println("set isosample 250, 250");
 
-                            "p '" + pathToData + "'\\" + "\n" +
-                            " using (" + condition + " ? $1 : 1/0):\\" + "\n" +
-                            "(" + condition + " ? $2 : 1/0)\\" + "\n" +
-                            " w l lt -1 lw 1.5" + "\n" +
-                            "pause -1" + "\n" +
-                            "exit"
-            );
+            writer.println("set table '" + pathToDataContour + "'");
+            writer.println("splot f(x,y) with lines notitle");
+            writer.println("unset table");
+
+            writer.println("reset");
+
+            writer.println("set title" +
+                    " 'X1min = " + new BigDecimal(solution[0]).setScale(3, RoundingMode.HALF_UP).doubleValue() +
+                    ";  X2min = " + new BigDecimal(solution[1]).setScale(3, RoundingMode.HALF_UP).doubleValue() +
+                    ";  F(X1min, X2min) = " + new BigDecimal(solution[2]).setScale(3, RoundingMode.HALF_UP).doubleValue() + "'");
+
+            writer.println("set view map");
+            writer.println("set grid");
+
+            writer.println("set xrange[" + Xmin + ":" + Xmax + "]");
+            writer.println("set yrange[" + Xmin + ":" + Xmax + "]");
+
+            writer.println("set style textbox opaque margins  0.5,  0.5 noborder");
+            writer.println("set cntrlabel  format '%8.3g' font ',7'");
+
+            writer.println("set autoscale");
+            writer.println("unset key");
+
+            writer.println(plotStr.toString());
+            writer.println("set label at x1, x2 \"Fmin\" boxed point pointtype 7 pointsize 1");
+
+            writer.println("pause -1");
+            writer.println("exit");
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();

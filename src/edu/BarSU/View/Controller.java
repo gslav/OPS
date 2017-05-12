@@ -1,7 +1,7 @@
 package edu.BarSU.View;
 
-import static edu.BarSU.Model.Variants.V6.Data.condition;
-import static edu.BarSU.Model.Variants.V6.Data.func;
+import static edu.BarSU.Model.Variants.V11.Data.condition;
+import static edu.BarSU.Model.Variants.V11.Data.func;
 
 import edu.BarSU.Model.SettingsData;
 
@@ -34,7 +34,7 @@ public class Controller {
                     new DirectGrid(),
                     new SettingsData(Double.valueOf(tfH.getText()), Double.valueOf(tfE.getText())));
         } catch (Exception Ex) {
-            new Alert(Alert.AlertType.ERROR, "ЧТо-то пошло не так =(").show();
+            new Alert(Alert.AlertType.ERROR, "Что-то пошло не так =(").show();
         }
     }
 
@@ -45,7 +45,7 @@ public class Controller {
                     new MonteCarlo(),
                     new SettingsData(Double.valueOf(tfH.getText()), Double.valueOf(tfE.getText())));
         } catch (Exception Ex) {
-            new Alert(Alert.AlertType.ERROR, "ЧТо-то пошло не так =(").show();
+            new Alert(Alert.AlertType.ERROR, "Что-то пошло не так =(").show();
         }
     }
 
@@ -73,7 +73,7 @@ public class Controller {
                             Double.valueOf(tfE.getText()),
                             new double[] {Double.valueOf(tfX1.getText()), Double.valueOf(tfX2.getText())}));
         } catch (Exception Ex) {
-            new Alert(Alert.AlertType.ERROR, "ЧТо-то пошло не так =(").show();
+            new Alert(Alert.AlertType.ERROR, "Что-то пошло не так =(").show();
         }
     }
 
@@ -90,7 +90,22 @@ public class Controller {
         double[] solution = TempMethod.getSolution();
 
         // генерация скрипта и запуск gnuplot
-        IsolinesGnuPlot.preSet(func(), condition(), solution);
+        switch (TempMethod.getClass().getSimpleName()) {
+            case "DirectGrid":
+                IsolinesGnuPlot.preSet(func(), condition(), solution);
+                break;
+            case "MonteCarlo":
+                IsolinesGnuPlot.preSet(func(), condition(), solution);
+                break;
+            case "HookJeeves":
+                // TODO передать в качестве дополнительно аргумента координаты пути
+                IsolinesGnuPlot.preSet(func(), condition(), solution);
+                break;
+            case "OfPenaltyFunctions":
+                // TODO передать в качестве дополнительно аргумента координаты пути
+                IsolinesGnuPlot.preSet(func(), condition(), solution);
+                break;
+        }
         IsolinesGnuPlot.runPlot();
     }
 }
