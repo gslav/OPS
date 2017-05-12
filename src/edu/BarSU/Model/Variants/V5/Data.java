@@ -27,6 +27,6 @@ public class Data {
     }
 
     public static String condition() {
-        return "(($1>=0) && ($2>=0) && (2*$1+3*$2>=6) && ($1+4*$2>=5))";
+        return "((x>=0) && (y>=0) && (2*x+3*y>=6) && (x+4*y>=5))";
     }
 }

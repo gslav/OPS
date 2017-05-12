@@ -19,11 +19,11 @@ public class Data {
     }
 
     public static String func(){
-        return "2*x-x*x+y*y";
+        return "2*x-x**2+y**2";
     }
 
     public static String condition() {
-        return "($1>=0 && $2>=0 && 2*$1*$1+3*$2*$2<=6)";
+        return "(x>=0 && y>=0 && 2*x**2+3*y**2<=6)";
     }
 
 }
